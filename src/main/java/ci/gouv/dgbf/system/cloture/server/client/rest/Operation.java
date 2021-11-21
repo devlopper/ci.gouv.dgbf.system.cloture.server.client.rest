@@ -4,10 +4,13 @@ import java.io.Serializable;
 
 import javax.json.bind.annotation.JsonbProperty;
 
+import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.__kernel__.object.AbstractObject;
+import org.cyk.utility.service.client.SpecificServiceGetter;
 
 import ci.gouv.dgbf.system.cloture.server.api.persistence.OperationExecutionStatus;
 import ci.gouv.dgbf.system.cloture.server.api.service.OperationDto;
+import ci.gouv.dgbf.system.cloture.server.api.service.OperationService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -51,4 +54,8 @@ public class Operation extends AbstractObject implements Serializable {
 	public static final String FIELD_EXECUTION_END_DATE_STRING = "executionEndDateString";
 	public static final String FIELD_EXECUTION_END_DATE_NUMBER_OF_MILLISECOND = "executionEndDateNumberOfMillisecond";
 	public static final String FIELD_EXECUTION_STATUS = "executionStatus";
+	
+	public static OperationService getService() {
+		return (OperationService) DependencyInjection.inject(SpecificServiceGetter.class).get(Operation.class);
+	}
 }

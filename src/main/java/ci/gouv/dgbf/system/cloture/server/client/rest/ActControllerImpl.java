@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.WebApplicationException;
 
+import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.session.SessionHelper;
+import org.cyk.utility.persistence.query.Filter;
 import org.cyk.utility.rest.ResponseHelper;
 import org.cyk.utility.service.client.SpecificController;
 
@@ -32,6 +34,16 @@ public class ActControllerImpl extends SpecificController.AbstractImpl<Act> impl
 	public void lock(List<Act> acts) {
 		lock(acts, SessionHelper.getUserName());
 	}
+	
+	@Override
+	public void lock(Act... acts) {
+		lock(CollectionHelper.listOf(Boolean.TRUE, acts));
+	}
+	
+	@Override
+	public void lock(Filter.Dto filter) {
+		throw new RuntimeException("Pas encore implémenté");
+	}
 
 	@Override
 	public void unlock(List<Act> acts, String trigger) {
@@ -47,4 +59,13 @@ public class ActControllerImpl extends SpecificController.AbstractImpl<Act> impl
 		unlock(acts, SessionHelper.getUserName());
 	}
 
+	@Override
+	public void unlock(Act... acts) {
+		unlock(CollectionHelper.listOf(Boolean.TRUE, acts));
+	}
+	
+	@Override
+	public void unlock(Filter.Dto filter) {
+		throw new RuntimeException("Pas encore implémenté");
+	}
 }
