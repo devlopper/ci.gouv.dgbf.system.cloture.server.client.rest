@@ -1,6 +1,8 @@
 package ci.gouv.dgbf.system.cloture.server.client.rest;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,14 +46,24 @@ public class ActControllerImpl extends SpecificController.AbstractImpl<Act> impl
 	public void lock(Filter.Dto filter) {
 		throw new RuntimeException("Pas encore implémenté");
 	}
-
+	
 	@Override
-	public void unlock(List<Act> acts, String trigger) {
+	public void unlockByIdentifiers(Collection<String> actsIdentifiers, String trigger) {
 		try {
-			Act.getService().unlock(acts == null ? null : acts.stream().map(Act::getIdentifier).collect(Collectors.toList()), trigger);
+			Act.getService().unlock(new ArrayList<String>(actsIdentifiers), trigger);
 		} catch (WebApplicationException exception) {
 			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
 		}
+	}
+	
+	@Override
+	public void unlockByIdentifiers(Collection<String> actsIdentifiers) {
+		unlockByIdentifiers(actsIdentifiers, SessionHelper.getUserName());
+	}
+
+	@Override
+	public void unlock(List<Act> acts, String trigger) {
+		unlockByIdentifiers(acts == null ? null : acts.stream().map(Act::getIdentifier).collect(Collectors.toList()), trigger);
 	}
 
 	@Override
@@ -66,6 +78,7 @@ public class ActControllerImpl extends SpecificController.AbstractImpl<Act> impl
 	
 	@Override
 	public void unlock(Filter.Dto filter) {
+		
 		throw new RuntimeException("Pas encore implémenté");
 	}
 }
