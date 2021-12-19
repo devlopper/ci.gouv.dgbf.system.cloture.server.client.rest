@@ -3,6 +3,8 @@ package ci.gouv.dgbf.system.cloture.server.client.rest;
 import java.util.Collection;
 import java.util.List;
 
+import javax.ws.rs.core.Response;
+
 import org.cyk.utility.persistence.query.Filter;
 import org.cyk.utility.service.client.SpecificController;
 
@@ -13,11 +15,11 @@ public interface ActController extends SpecificController<Act> {
 	void lock(Act...acts);
 	void lock(Filter.Dto filter);
 	
-	void unlockByIdentifiers(Collection<String> actsIdentifiers,String trigger);
-	void unlockByIdentifiers(Collection<String> actsIdentifiers);
+	Response unlockByIdentifiers(Collection<String> actsIdentifiers,String trigger,Boolean processedIgnorable);
+	Response unlockByIdentifiers(Collection<String> actsIdentifiers,Boolean processedIgnorable);
 	
-	void unlock(List<Act> acts,String trigger);
-	void unlock(List<Act> acts);
-	void unlock(Act...acts);
-	void unlock(Filter.Dto filter);
+	Response unlock(List<Act> acts,String trigger,Boolean processedIgnorable);
+	Response unlock(List<Act> acts,Boolean processedIgnorable);
+	Response unlock(Boolean processedIgnorable,Act...acts);
+	Response unlock(Filter.Dto filter,Boolean processedIgnorable);
 }

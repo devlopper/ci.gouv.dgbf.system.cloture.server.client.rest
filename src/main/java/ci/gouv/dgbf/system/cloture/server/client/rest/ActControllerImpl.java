@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 
 import org.cyk.utility.__kernel__.collection.CollectionHelper;
 import org.cyk.utility.__kernel__.session.SessionHelper;
@@ -48,37 +49,36 @@ public class ActControllerImpl extends SpecificController.AbstractImpl<Act> impl
 	}
 	
 	@Override
-	public void unlockByIdentifiers(Collection<String> actsIdentifiers, String trigger) {
+	public Response unlockByIdentifiers(Collection<String> actsIdentifiers, String trigger,Boolean processedIgnorable) {
 		try {
-			Act.getService().unlock(new ArrayList<String>(actsIdentifiers), trigger);
+			return Act.getService().unlock(new ArrayList<String>(actsIdentifiers), trigger,processedIgnorable);
 		} catch (WebApplicationException exception) {
 			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
 		}
 	}
 	
 	@Override
-	public void unlockByIdentifiers(Collection<String> actsIdentifiers) {
-		unlockByIdentifiers(actsIdentifiers, SessionHelper.getUserName());
+	public Response unlockByIdentifiers(Collection<String> actsIdentifiers,Boolean processedIgnorable) {
+		return unlockByIdentifiers(actsIdentifiers, SessionHelper.getUserName(),processedIgnorable);
 	}
 
 	@Override
-	public void unlock(List<Act> acts, String trigger) {
-		unlockByIdentifiers(acts == null ? null : acts.stream().map(Act::getIdentifier).collect(Collectors.toList()), trigger);
+	public Response unlock(List<Act> acts, String trigger,Boolean processedIgnorable) {
+		return unlockByIdentifiers(acts == null ? null : acts.stream().map(Act::getIdentifier).collect(Collectors.toList()), trigger,processedIgnorable);
 	}
 
 	@Override
-	public void unlock(List<Act> acts) {
-		unlock(acts, SessionHelper.getUserName());
+	public Response unlock(List<Act> acts,Boolean processedIgnorable) {
+		return unlock(acts, SessionHelper.getUserName(),processedIgnorable);
 	}
 
 	@Override
-	public void unlock(Act... acts) {
-		unlock(CollectionHelper.listOf(Boolean.TRUE, acts));
+	public Response unlock(Boolean processedIgnorable,Act... acts) {
+		return unlock(CollectionHelper.listOf(Boolean.TRUE, acts),processedIgnorable);
 	}
 	
 	@Override
-	public void unlock(Filter.Dto filter) {
-		
+	public Response unlock(Filter.Dto filter,Boolean processedIgnorable) {
 		throw new RuntimeException("Pas encore implémenté");
 	}
 }
