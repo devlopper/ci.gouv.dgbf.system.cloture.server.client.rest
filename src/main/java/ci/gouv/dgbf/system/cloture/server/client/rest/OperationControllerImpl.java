@@ -13,16 +13,35 @@ import org.cyk.utility.service.client.SpecificController;
 public class OperationControllerImpl extends SpecificController.AbstractImpl<Operation> implements OperationController,Serializable {
 
 	@Override
-	public void execute(Operation operation,String trigger,Boolean blocking) {
+	public void create(String typeIdentifier, String code, String name, String reason, String auditWho) {
 		try {
-			Operation.getService().execute(operation.getIdentifier(), trigger, blocking);
+			Operation.getService().create(typeIdentifier, code, name, reason,auditWho);
 		} catch (WebApplicationException exception) {
 			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
 		}
 	}
 	
 	@Override
-	public void execute(Operation operation, Boolean blocking) {
+	public void create(String typeIdentifier, String code, String name, String reason) {
+		create(typeIdentifier, code, name, reason, SessionHelper.getUserName());
+	}
+	
+	@Override
+	public void create(OperationType type, String code, String name, String reason) {
+		create(type == null ? null : type.getIdentifier(), code, name, reason);
+	}
+	
+	@Override
+	public void execute(Script operation,String trigger,Boolean blocking) {
+		try {
+			Script.getService().execute(operation.getIdentifier(), trigger, blocking);
+		} catch (WebApplicationException exception) {
+			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
+		}
+	}
+	
+	@Override
+	public void execute(Script operation, Boolean blocking) {
 		execute(operation, SessionHelper.getUserName(), blocking);
 	}
 

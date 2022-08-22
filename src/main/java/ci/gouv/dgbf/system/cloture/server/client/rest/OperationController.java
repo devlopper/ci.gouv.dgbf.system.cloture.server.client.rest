@@ -4,6 +4,10 @@ import org.cyk.utility.service.client.SpecificController;
 
 public interface OperationController extends SpecificController<Operation> {
 
-	void execute(Operation operation,String trigger,Boolean blocking);
-	void execute(Operation operation,Boolean blocking);
+	void create(String typeIdentifier,String code,String name,String reason,String auditWho);
+	void create(String typeIdentifier,String code,String name,String reason);
+	void create(OperationType type,String code,String name,String reason);
+	
+	void execute(Script operation,String trigger,Boolean blocking);
+	void execute(Script operation,Boolean blocking);
 }
