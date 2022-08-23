@@ -32,6 +32,11 @@ public class OperationControllerImpl extends SpecificController.AbstractImpl<Ope
 	}
 	
 	@Override
+	public void create(Operation operation) {
+		create(operation.getType(), operation.getCode(), operation.getName(), operation.getReason());
+	}
+	
+	@Override
 	public void execute(Script operation,String trigger,Boolean blocking) {
 		try {
 			Script.getService().execute(operation.getIdentifier(), trigger, blocking);

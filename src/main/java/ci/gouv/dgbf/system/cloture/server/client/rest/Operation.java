@@ -17,6 +17,7 @@ import lombok.experimental.Accessors;
 @Getter @Setter @Accessors(chain=true)
 public class Operation extends AbstractObject implements Serializable {
 
+	private OperationType type;
 	@JsonbProperty(value = OperationDto.JSON_IDENTIFIER) private String identifier;	
 	@JsonbProperty(value = OperationDto.JSON_CODE) private String code;	
 	@JsonbProperty(value = OperationDto.JSON_NAME) private String name;
