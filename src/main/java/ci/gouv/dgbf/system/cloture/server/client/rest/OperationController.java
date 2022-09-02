@@ -44,6 +44,6 @@ public interface OperationController extends SpecificController<Operation> {
 	
 	/* Execute */
 	
-	void execute(Script operation,String trigger,Boolean blocking);
-	void execute(Script operation,Boolean blocking);
+	Response startExecution(String identifier,String auditWho);
+	Response startExecution(Operation operation);
 }

@@ -163,20 +163,20 @@ public class OperationControllerImpl extends SpecificController.AbstractImpl<Ope
 		return removeActComprehensively(operation == null ? null: operation.getIdentifier(), FieldHelper.readSystemIdentifiersAsStrings(acts));
 	}
 	
-	/* Execute */
+	/* Start Execution */
 	
 	@Override
-	public void execute(Script operation,String trigger,Boolean blocking) {
+	public Response startExecution(String identifier, String auditWho) {
 		try {
-			Script.getService().execute(operation.getIdentifier(), trigger, blocking);
+			return Operation.getService().startExecution(identifier, auditWho);
 		} catch (WebApplicationException exception) {
 			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
 		}
 	}
 	
 	@Override
-	public void execute(Script operation, Boolean blocking) {
-		execute(operation, SessionHelper.getUserName(), blocking);
+	public Response startExecution(Operation operation) {
+		return startExecution(operation == null ? null : operation.getIdentifier(), SessionHelper.getUserName());
 	}
 
 	@Override

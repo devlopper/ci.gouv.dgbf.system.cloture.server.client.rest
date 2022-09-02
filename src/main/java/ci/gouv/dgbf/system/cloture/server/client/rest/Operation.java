@@ -23,6 +23,8 @@ public class Operation extends AbstractObject implements Serializable {
 	@JsonbProperty(value = OperationDto.JSON_NAME) private String name;
 	@JsonbProperty(value = OperationDto.JSON_TYPE_AS_STRING) String typeAsString;
 	@JsonbProperty(value = OperationDto.JSON_REASON) String reason;
+	@JsonbProperty(value = OperationDto.JSON_STATUS_AS_STRING) String statusAsString;
+	@JsonbProperty(value = OperationDto.JSON___AUDIT__) String __audit__;
 	
 	@Override
 	public String toString() {
@@ -34,6 +36,8 @@ public class Operation extends AbstractObject implements Serializable {
 	public static final String FIELD_NAME = "name";
 	public static final String FIELD_TYPE_AS_STRING = "typeAsString";
 	public static final String FIELD_REASON = "reason";
+	public static final String FIELD_STATUS_AS_STRING = "statusAsString";
+	public static final String FIELD___AUDIT__ = "__audit__";
 	
 	public static OperationService getService() {
 		return (OperationService) DependencyInjection.inject(SpecificServiceGetter.class).get(Operation.class);
