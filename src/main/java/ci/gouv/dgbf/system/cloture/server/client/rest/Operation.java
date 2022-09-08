@@ -7,6 +7,7 @@ import javax.json.bind.annotation.JsonbProperty;
 import org.cyk.utility.__kernel__.DependencyInjection;
 import org.cyk.utility.__kernel__.object.AbstractObject;
 import org.cyk.utility.service.client.SpecificServiceGetter;
+import org.cyk.utility.service.client.entity.Color;
 
 import ci.gouv.dgbf.system.cloture.server.api.service.OperationDto;
 import ci.gouv.dgbf.system.cloture.server.api.service.OperationService;
@@ -23,8 +24,14 @@ public class Operation extends AbstractObject implements Serializable {
 	@JsonbProperty(value = OperationDto.JSON_NAME) private String name;
 	@JsonbProperty(value = OperationDto.JSON_TYPE_AS_STRING) String typeAsString;
 	@JsonbProperty(value = OperationDto.JSON_REASON) String reason;
+	@JsonbProperty(value = OperationDto.JSON_STATUS_CODE) String statusCode;
 	@JsonbProperty(value = OperationDto.JSON_STATUS_AS_STRING) String statusAsString;
+	@JsonbProperty(value = OperationDto.JSON_STARTED) Boolean started;
+	@JsonbProperty(value = OperationDto.JSON_EXECUTED) Boolean executed;
+	
 	@JsonbProperty(value = OperationDto.JSON___AUDIT__) String __audit__;
+
+	@JsonbProperty(value = OperationDto.JSON_COLOR) Color color;
 	
 	@Override
 	public String toString() {
