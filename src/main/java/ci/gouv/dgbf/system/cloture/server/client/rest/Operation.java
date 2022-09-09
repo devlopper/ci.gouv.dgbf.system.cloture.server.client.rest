@@ -26,6 +26,7 @@ public class Operation extends AbstractObject implements Serializable {
 	@JsonbProperty(value = OperationDto.JSON_REASON) String reason;
 	@JsonbProperty(value = OperationDto.JSON_STATUS_CODE) String statusCode;
 	@JsonbProperty(value = OperationDto.JSON_STATUS_AS_STRING) String statusAsString;
+	@JsonbProperty(value = OperationDto.JSON_CREATED) Boolean created;
 	@JsonbProperty(value = OperationDto.JSON_STARTED) Boolean started;
 	@JsonbProperty(value = OperationDto.JSON_EXECUTED) Boolean executed;
 	
