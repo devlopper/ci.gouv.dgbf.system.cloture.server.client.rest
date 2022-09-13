@@ -29,6 +29,7 @@ public class Operation extends AbstractObject implements Serializable {
 	@JsonbProperty(value = OperationDto.JSON_CREATED) Boolean created;
 	@JsonbProperty(value = OperationDto.JSON_STARTED) Boolean started;
 	@JsonbProperty(value = OperationDto.JSON_EXECUTED) Boolean executed;
+	@JsonbProperty(value = OperationDto.JSON_NUMBER_OF_ACTS) Long numberOfActs;
 	
 	@JsonbProperty(value = OperationDto.JSON___AUDIT__) String __audit__;
 
@@ -45,6 +46,7 @@ public class Operation extends AbstractObject implements Serializable {
 	public static final String FIELD_TYPE_AS_STRING = "typeAsString";
 	public static final String FIELD_REASON = "reason";
 	public static final String FIELD_STATUS_AS_STRING = "statusAsString";
+	public static final String FIELD_NUMBER_OF_ACTS = "numberOfActs";
 	public static final String FIELD___AUDIT__ = "__audit__";
 	
 	public static OperationService getService() {
