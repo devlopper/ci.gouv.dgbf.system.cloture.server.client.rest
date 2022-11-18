@@ -163,6 +163,125 @@ public class OperationControllerImpl extends SpecificController.AbstractImpl<Ope
 		return removeActComprehensively(operation == null ? null: operation.getIdentifier(), FieldHelper.readSystemIdentifiersAsStrings(acts));
 	}
 	
+	/* Add Imputations */
+	
+	@Override
+	public Response addImputation(String identifier, Collection<String> imputationsIdentifiers, Boolean existingIgnorable,String auditWho) {
+		try {
+			return Operation.getService().addImputation(identifier, (List<String>) imputationsIdentifiers, existingIgnorable, auditWho);
+		} catch (WebApplicationException exception) {
+			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
+		}
+	}
+	
+	@Override
+	public Response addImputation(String identifier, Collection<String> imputationsIdentifiers, Boolean existingIgnorable) {
+		return addImputation(identifier, imputationsIdentifiers, existingIgnorable, SessionHelper.getUserName());
+	}
+	
+	@Override
+	public Response addImputation(Operation operation, Collection<Imputation> imputations, Boolean existingIgnorable) {
+		return addImputation(operation == null ? null : operation.getIdentifier(), FieldHelper.readSystemIdentifiersAsStrings(imputations), existingIgnorable);
+	}
+	
+	@Override
+	public Response addImputationByFilter(String identifier, Filter.Dto filter, Boolean existingIgnorable, String auditWho) {
+		try {
+			return Operation.getService().addImputationByFilter(identifier, filter == null ? null : JsonbBuilder.create().toJson(filter),FilterFormat.JSON, existingIgnorable, auditWho);
+		} catch (WebApplicationException exception) {
+			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
+		}
+	}
+	
+	@Override
+	public Response addImputationByFilter(String identifier, Filter.Dto filter, Boolean existingIgnorable) {
+		return addImputationByFilter(identifier, filter, existingIgnorable,SessionHelper.getUserName());
+	}
+	
+	@Override
+	public Response addImputationByFilter(Operation operation, Filter.Dto filter, Boolean existingIgnorable) {
+		return addImputationByFilter(operation == null ? null: operation.getIdentifier(), filter, existingIgnorable);
+	}
+	
+	@Override
+	public Response addImputationComprehensively(String identifier, Collection<String> imputationsIdentifiers, String auditWho) {
+		try {
+			return Operation.getService().addImputationComprehensively(identifier, (List<String>) imputationsIdentifiers, auditWho);
+		} catch (WebApplicationException exception) {
+			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
+		}
+	}
+	
+	@Override
+	public Response addImputationComprehensively(String identifier, Collection<String> imputationsIdentifiers) {
+		return addImputationComprehensively(identifier, imputationsIdentifiers,SessionHelper.getUserName());
+	}
+	
+	@Override
+	public Response addImputationComprehensively(Operation operation, Collection<Imputation> imputations) {
+		return addImputationComprehensively(operation == null ? null: operation.getIdentifier(), FieldHelper.readSystemIdentifiersAsStrings(imputations));
+	}
+	
+	/* Remove Imputations */
+	
+	@Override
+	public Response removeImputation(String identifier, Collection<String> imputationsIdentifiers, Boolean existingIgnorable,String auditWho) {
+		try {
+			return Operation.getService().removeImputation(identifier, (List<String>) imputationsIdentifiers, existingIgnorable, auditWho);
+		} catch (WebApplicationException exception) {
+			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
+		}
+	}
+	
+	@Override
+	public Response removeImputation(String identifier, Collection<String> imputationsIdentifiers, Boolean existingIgnorable) {
+		return removeImputation(identifier, imputationsIdentifiers, existingIgnorable, SessionHelper.getUserName());
+	}
+	
+	@Override
+	public Response removeImputation(Operation operation, Collection<Imputation> imputations, Boolean existingIgnorable) {
+		return removeImputation(operation == null ? null : operation.getIdentifier(), FieldHelper.readSystemIdentifiersAsStrings(imputations), existingIgnorable);
+	}
+	
+	@Override
+	public Response removeImputationByFilter(String identifier, Filter.Dto filter, Boolean existingIgnorable, String auditWho) {
+		try {
+			return Operation.getService().removeImputationByFilter(identifier, filter == null ? null : JsonbBuilder.create().toJson(filter),FilterFormat.JSON, existingIgnorable, auditWho);
+		} catch (WebApplicationException exception) {
+			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
+		}
+	}
+	
+	@Override
+	public Response removeImputationByFilter(String identifier, Filter.Dto filter, Boolean existingIgnorable) {
+		return removeImputationByFilter(identifier, filter, existingIgnorable,SessionHelper.getUserName());
+	}
+	
+	@Override
+	public Response removeImputationByFilter(Operation operation, Filter.Dto filter, Boolean existingIgnorable) {
+		return removeImputationByFilter(operation == null ? null: operation.getIdentifier(), filter, existingIgnorable);
+	}
+	
+	@Override
+	public Response removeImputationComprehensively(String identifier, Collection<String> imputationsIdentifiers, String auditWho) {
+		try {
+			return Operation.getService().removeImputationComprehensively(identifier, (List<String>) imputationsIdentifiers, auditWho);
+		} catch (WebApplicationException exception) {
+			throw new RuntimeException(ResponseHelper.getEntity(String.class, exception.getResponse()));
+		}
+	}
+	
+	@Override
+	public Response removeImputationComprehensively(String identifier, Collection<String> imputationsIdentifiers) {
+		return removeImputationComprehensively(identifier, imputationsIdentifiers,SessionHelper.getUserName());
+	}
+	
+	@Override
+	public Response removeImputationComprehensively(Operation operation, Collection<Imputation> imputations) {
+		return removeImputationComprehensively(operation == null ? null: operation.getIdentifier(), FieldHelper.readSystemIdentifiersAsStrings(imputations));
+	}
+	
+	
 	/* Start Execution */
 	
 	@Override
